@@ -6,6 +6,7 @@ import Stack from "@mui/material/Stack";
 import { Button, colors, Divider, Drawer, List, ListItemButton, Typography } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import MenuIcon from '@mui/icons-material/Menu';
+import { NavLink, Outlet } from "react-router-dom";
 
 
 function Nav() {
@@ -15,8 +16,8 @@ function Nav() {
   const drawerClosedWidth = 64;
 
   const menuItems = [
-    { text: 'Dashboard', icon: <DashboardIcon />},
-    { text: 'Dashb', icon: <DashboardIcon />},
+    { text: 'Dashboard', icon: <DashboardIcon />, path:'/dashboard' },
+    { text: 'Payroll', icon: <DashboardIcon />, path:'/payroll/overview'},
   ];
   
   const toggleDrawer = () => {
@@ -54,17 +55,19 @@ function Nav() {
 };
   return (
     <>
-    <Box sx={{ backgroundColor:'primary.main', height: 64, width: '100%' }}>
+    <Box sx={{ backgroundColor:'primary.main', height: 64, width: '100%', mb: 0 }}>  //header
       <Typography variant="h2" 
       sx={{ 
         position: 'absolute',
         left: open ? drawerOpenWidth + 60 : drawerClosedWidth + 60,
         top: 13,
         color: colors.common.white,
+        mb: 0
         }}>
         HR Management System
       </Typography>
     </Box>
+
     <Drawer variant="permanent" sx={{
       width: open ? drawerOpenWidth : drawerClosedWidth,
       flexShrink: 0,
@@ -79,7 +82,11 @@ function Nav() {
 
       <List sx={{ display: 'flex', flexDirection: 'column', width: "fit-content", mx: 'auto', pt: 2 }}>
         {menuItems.map((item) => (
-          <ListItemButton key={item.text}>
+          <ListItemButton 
+          key={item.text}
+          component={NavLink}
+          to={item.path}
+          >
             <Box
             sx={{ display: 'flex', alignItems: 'center', p: open ? 1 : 0, pb: 1 }}
             >
@@ -114,6 +121,16 @@ function Nav() {
     >
       <MenuIcon sx={{ color: '#ffffff' }} />
     </Button>
+
+    <main
+        style={{
+          marginLeft: open ? drawerOpenWidth : drawerClosedWidth,
+          transition: "margin-left 0.3s ease",
+          padding: 10,
+        }}
+      >
+        <Outlet />
+      </main>
 
     </>
   )

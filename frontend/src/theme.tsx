@@ -18,6 +18,7 @@ export const theme = createTheme({
     h3: { fontSize: '1.75rem', fontWeight: 500 },
     body1: { fontSize: '1rem', fontWeight: 400 },
     body2: { fontSize: '0.875rem', fontWeight: 400 },
+    subtitle1: { fontSize: '1.25rem', fontWeight: 600 , color: '374151'},
     button: { textTransform: 'none', fontWeight: 600 },
     },
 components: {
@@ -42,5 +43,6 @@ components: {
         },
       },
     },
+  
   },
 });  
