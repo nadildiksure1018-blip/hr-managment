@@ -5,7 +5,7 @@ function Kpi() {
   return (
     <>
     <Box>
-        Kpi
+        Kp
     </Box>
     </>
   )
