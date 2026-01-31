@@ -8,7 +8,7 @@ function Overview() {
     <Kpi title="Total Employees"
           value={128}
           icon={<DashboardIcon />}
-          color="primary.main"
+          description="Total number of employees in the company"
           subIcon={<DashboardIcon />}
         />
   )

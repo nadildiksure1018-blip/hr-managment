@@ -51,7 +51,7 @@ export default function KpiCard({
                 variant="body2"
                 color="text.disabled"
                 mt={0.5}
-                fontWeight={600}
+                fontWeight={500}
               >
                 {description}
               </Typography>
