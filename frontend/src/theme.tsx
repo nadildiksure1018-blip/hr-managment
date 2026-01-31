@@ -43,5 +43,13 @@ components: {
         },
       },
     },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: '12px', // Rounded corners for cards
+          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Subtle shadow
+        },
+      },
+    },
   }
 });  

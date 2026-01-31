@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent, Typography, Box, useTheme } from "@mui/material";
+import { Card, CardContent, Typography, Box,} from "@mui/material";
 
 interface KpiCardProps {
   title: string;
@@ -21,16 +21,17 @@ export default function KpiCard({
       sx={{
         height: "100%",
         borderRadius: 2,
+        boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.2)",
       }}
     >
-      <CardContent>
+      <CardContent sx={{ pb: 0,'&:last-child': { pb: 1 }}}>
         <Box display="flex" alignItems="center" justifyContent="space-between">
-          <Box>
-            <Typography variant="h4" fontWeight={600} color="text.primary">
+          <Box p={0}>
+            <Typography variant="h5" fontWeight={600} color="text.primary" ml={1} mb={0.5}>
               {value}
             </Typography>
 
-            <Typography variant="body1" color="text.secondary">
+            <Typography variant="body1" color="text.disabled" >
               {title}
             </Typography>
 
@@ -52,6 +53,7 @@ export default function KpiCard({
                 color="text.disabled"
                 mt={0.5}
                 fontWeight={500}
+                mb={0}
               >
                 {description}
               </Typography>
@@ -69,7 +71,7 @@ export default function KpiCard({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                mb: 2,
+                mb: 3,
               }}
             >
               {React.cloneElement(icon, {

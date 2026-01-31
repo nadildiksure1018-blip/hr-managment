@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Tabs, Tab, Typography } from "@mui/material";
 import { NavLink, Outlet, useLocation, Link } from "react-router-dom";
 
+
 function Payroll() {
 
   const tabs = [
@@ -28,7 +29,10 @@ function Payroll() {
           ))}
         </Tabs>
       </div>
-      <Outlet />
+      <div style={{ padding: "20px" }}>
+        <Outlet />
+      </div>
+      
     </>
   );
 }
