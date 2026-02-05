@@ -16,6 +16,10 @@ export default function PaymentMethodSelector({
     onChange: (value: string) => void;
 }) {
   return (
+    <>
+    <Typography variant="body1" color="text.secondary" sx={{ mb: 0.5 }}>
+        Payment Method
+    </Typography>
     <Stack direction="row" spacing={3}>
       {methods.map((method) => {
         const selected = value === method.id;
@@ -54,5 +58,6 @@ export default function PaymentMethodSelector({
         )
       })}
     </Stack>
+    </>
   );
 }

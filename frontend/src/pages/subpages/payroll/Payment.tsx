@@ -43,7 +43,7 @@ function Payment() {
     <Card>
       {/* Payment content goes here */}
       <CardContent>
-        <Typography variant="body1" sx={{ mb: 2 , color: '#475569'}}>
+        <Typography variant="subtitle1" sx={{ mb: 1 , color: 'text.primary' }}>
           {type.charAt(0).toUpperCase() + type.slice(1)} Payment Details
         </Typography>
         <PaymentMethodSelector value={paymentMethod} onChange={setPaymentMethod} />
