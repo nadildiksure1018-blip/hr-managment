@@ -18,8 +18,8 @@ export default function PaymentMethodSelector({
 }) {
   return (
     <>
-    <Typography variant="body1" color="text.secondary" sx={{ mb: 1 }}>
-        <CurrencyExchangeIcon sx={{ verticalAlign: 'middle', mr: 0.5, color: 'secondary.main' }} />
+    <Typography variant="body1" color="text.secondary" sx={{ mb:0 }}>
+        <CurrencyExchangeIcon sx={{ verticalAlign: 'middle', mr: 0.5, color: 'text.secondary' }} />
         Payment Method
     </Typography>
     <Stack direction="row" spacing={3}>

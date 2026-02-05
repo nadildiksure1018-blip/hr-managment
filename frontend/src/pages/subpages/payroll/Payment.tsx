@@ -1,14 +1,34 @@
 import React from "react";
-import { useState } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { Box, Card, CardContent, Typography, Stack } from "@mui/material";
+import { Box, Card, CardContent, Typography, Stack, TextField, Autocomplete, InputAdornment, MenuItem, Select, FormControl, InputLabel } from "@mui/material";
 import PaymentMethodSelector from "../../../components/reusable/PaymentMethodSelector";
+import PersonIcon from "@mui/icons-material/Person";
 
+type Employee = {
+  name: string;
+  id: string;
+};
 
 function Payment() {
   const [type, setType] = React.useState("salary");
   const [paymentMethod, setPaymentMethod] = React.useState("cash");
+  const [employee, setEmployee] = React.useState<Employee | null>(null); // store as object
+  const [netAmount, setNetAmount] = React.useState("4170.40");
+  const [notes, setNotes] = React.useState("");
+  const [month, setMonth] = React.useState("April");
+
+  const employees = [
+    { name: "Alex Rivera", id: "EMP-1042" },
+    { name: "Maria Lopez", id: "EMP-1043" },
+    { name: "John Doe", id: "EMP-1044" },
+    { name: "Jane Smith", id: "EMP-1045" },
+  ];
+
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
   
   const handleType = (
     event: React.MouseEvent<HTMLElement>,
@@ -18,6 +38,78 @@ function Payment() {
       setType(newType);
     }
   };
+
+  const salary = () => {
+    return (
+      <Stack spacing={3}>
+        <Autocomplete
+          options={employees}
+          getOptionLabel={(option) => `${option.name} (${option.id})`}
+          value={employee}
+          onChange={(event, newValue) => setEmployee(newValue)}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Employee Name/ID"
+              InputProps={{
+                ...params.InputProps,
+                startAdornment: (
+                  <InputAdornment position="start">
+                  <PersonIcon color="action" />
+                  </InputAdornment>
+               ),
+              }}
+            />
+          )}
+          // need to add refs and keydown handlers here as well
+        />  
+         <Stack direction="row" spacing={2}>
+            {/* Month Selector */}
+            <FormControl fullWidth>
+              <InputLabel id="month-label">Month</InputLabel>
+              <Select
+                labelId="month-label"
+                label="Month"
+                value={month}
+                onChange={(e) => setMonth(e.target.value)}
+                // inputRef={monthRef}
+                // onKeyDown={(e) => handleKeyDown(e, netAmountRef)}
+              >
+                {months.map((m) => (
+                  <MenuItem key={m} value={m}>
+                    {m}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            {/* Net Amount */}
+            <TextField
+              label="Net Amount ($)"
+              value={netAmount}
+              onChange={(e) => setNetAmount(e.target.value)}
+              InputProps={{
+                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+              }}
+              fullWidth
+              // inputRef={netAmountRef}
+              // onKeyDown={(e) => handleKeyDown(e, notesRef)}
+            />
+          </Stack>
+          <PaymentMethodSelector value={paymentMethod} onChange={setPaymentMethod} />
+          <TextField
+            label="Payment Notes (Optional)"
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            placeholder="Add any specific details regarding this payroll cycle..."
+            multiline
+            rows={4}
+            fullWidth
+            // inputRef={notesRef}
+          />
+        
+      </Stack>
+    )}
   
   return (
     <>
@@ -40,15 +132,26 @@ function Payment() {
         </ToggleButton>
       </ToggleButtonGroup>
     </Box>
-    <Card>
+    <Stack direction="row" spacing={3} >
+    <Card sx={{ flex: 2 }}>
       {/* Payment content goes here */}
       <CardContent>
-        <Typography variant="subtitle1" sx={{ mb: 1 , color: 'text.primary' }}>
+        <Typography variant="subtitle1" sx={{ mb: 4, color: 'text.primary' }}>
           {type.charAt(0).toUpperCase() + type.slice(1)} Payment Details
         </Typography>
-        <PaymentMethodSelector value={paymentMethod} onChange={setPaymentMethod} />
+        {type === "salary" && salary()}
+        
       </CardContent>
     </Card>
+    <Card>
+      {/* Payment summary goes here */}
+      <CardContent>
+        <Typography variant="subtitle1" sx={{ mb: 1 , color: 'text.primary' }}>
+          Payment Summary
+        </Typography>
+      </CardContent>
+    </Card>
+    </Stack>
     </>
   );
 }

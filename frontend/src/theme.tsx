@@ -78,6 +78,44 @@ components: {
           borderLeft: '1px solid #406BCF',
         },
       },
-    },  
+    },
+    MuiTextField: { 
+      styleOverrides: {
+        root: {
+          '& .MuiOutlinedInput-root': {
+            borderRadius: '8px', // Rounded corners for TextField
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#9CA3AF', // Border color on hover
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#406BCF', // Border color when focused
+            },
+          
+          "& .MuiInputBase-input": {
+          // fontSize: "15px",
+          color: "#3E4958",
+          },
+
+          },
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          borderRadius: '8px', // Rounded corners for Select
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#9CA3AF', // Default border color
+          },
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#9CA3AF', // Border color on hover
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#406BCF', // Border color when focused
+          },
+        },
+      },
+    },
+
   }
 });  
