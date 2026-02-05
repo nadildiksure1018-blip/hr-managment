@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Box, Radio, Typography, Stack } from "@mui/material";
 
+
 const methods = [
   { id: "cash", title: "Cash", subtitle: "Direct handover" },
   { id: "cheque", title: "Cheque", subtitle: "Physical document" },
@@ -8,11 +9,11 @@ const methods = [
 ];
 
 export default function PaymentMethodSelector({
-  value,
-  onChange
+    value,
+    onChange
 }: {
-  value: string;
-  onChange: (value: string) => void;
+    value: string;
+    onChange: (value: string) => void;
 }) {
   return (
     <Stack direction="row" spacing={3}>

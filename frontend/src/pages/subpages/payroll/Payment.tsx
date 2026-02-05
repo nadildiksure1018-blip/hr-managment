@@ -5,20 +5,20 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { Box, Card, CardContent, Typography, Stack } from "@mui/material";
 import PaymentMethodSelector from "../../../components/reusable/PaymentMethodSelector";
 
-const [type, setType] = React.useState("salary");
-const [paymentMethod, setPaymentMethod] = React.useState("cash");
-
-const handleType = (
-  event: React.MouseEvent<HTMLElement>,
-  newType: string,
-) => {
-  if (newType !== null) {
-    setType(newType);
-  }
-};
 
 function Payment() {
-
+  const [type, setType] = React.useState("salary");
+  const [paymentMethod, setPaymentMethod] = React.useState("cash");
+  
+  const handleType = (
+    event: React.MouseEvent<HTMLElement>,
+    newType: string,
+  ) => {
+    if (newType !== null) {
+      setType(newType);
+    }
+  };
+  
   return (
     <>
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mb: 3 }} >
