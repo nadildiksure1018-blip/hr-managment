@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Box, Radio, Typography, Stack } from "@mui/material";
-
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 
 const methods = [
   { id: "cash", title: "Cash", subtitle: "Direct handover" },
@@ -17,7 +18,8 @@ export default function PaymentMethodSelector({
 }) {
   return (
     <>
-    <Typography variant="body1" color="text.secondary" sx={{ mb: 0.5 }}>
+    <Typography variant="body1" color="text.secondary" sx={{ mb: 1 }}>
+        <CurrencyExchangeIcon sx={{ verticalAlign: 'middle', mr: 0.5, color: 'secondary.main' }} />
         Payment Method
     </Typography>
     <Stack direction="row" spacing={3}>
