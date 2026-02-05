@@ -1,20 +1,23 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
+import { useState } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { Box, Card } from "@mui/material";
+import { Box, Card, CardContent, Typography, Stack } from "@mui/material";
+import PaymentMethodSelector from "../../../components/reusable/PaymentMethodSelector";
 
+const [type, setType] = React.useState("salary");
+const [paymentMethod, setPaymentMethod] = React.useState("cash");
+
+const handleType = (
+  event: React.MouseEvent<HTMLElement>,
+  newType: string,
+) => {
+  if (newType !== null) {
+    setType(newType);
+  }
+};
 
 function Payment() {
-  const [type, setType] = React.useState("salary");
-  const handleType = (
-    event: React.MouseEvent<HTMLElement>,
-    newType: string,
-  ) => {
-    if (newType !== null) {
-      setType(newType);
-    }
-  };
 
   return (
     <>
@@ -38,7 +41,13 @@ function Payment() {
       </ToggleButtonGroup>
     </Box>
     <Card>
-
+      {/* Payment content goes here */}
+      <CardContent>
+        <Typography variant="body1" sx={{ mb: 2 , color: '#475569'}}>
+          {type.charAt(0).toUpperCase() + type.slice(1)} Payment Details
+        </Typography>
+        <PaymentMethodSelector value={paymentMethod} onChange={setPaymentMethod} />
+      </CardContent>
     </Card>
     </>
   );
