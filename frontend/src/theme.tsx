@@ -51,5 +51,33 @@ components: {
         },
       },
     },
+    MuiToggleButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: '8px',
+          padding: '10px 20px',
+          border: '1px solid #406BCF',
+          color: '#fff',
+          backgroundColor: '#94ADF0',
+          '&:hover': {
+            backgroundColor: '#839DE6',
+          },
+          '&.Mui-selected': {
+            backgroundColor: '#1E3A8A',
+            color: '#fff',
+            '&:hover': {
+              backgroundColor: '#16325C',
+            },
+          },
+        },
+      },
+    },
+    MuiToggleButtonGroup: {
+      styleOverrides: {
+        grouped: {
+          borderLeft: '1px solid #406BCF',
+        },
+      },
+    },  
   }
 });  
