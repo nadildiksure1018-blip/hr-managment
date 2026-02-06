@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Box, Radio, Typography, Stack } from "@mui/material";
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 
 const methods = [
@@ -18,48 +17,50 @@ export default function PaymentMethodSelector({
 }) {
   return (
     <>
-    <Typography variant="body1" color="text.secondary" sx={{ mb:0 }}>
-        <CurrencyExchangeIcon sx={{ verticalAlign: 'middle', mr: 0.5, color: 'text.secondary' }} />
-        Payment Method
-    </Typography>
-    <Stack direction="row" spacing={3}>
-      {methods.map((method) => {
-        const selected = value === method.id;
+    <Box>
+      <Typography variant="body1" color="text.secondary" sx={{ mb:1 }}>
+          <CurrencyExchangeIcon sx={{ verticalAlign: 'middle', mr: 0.5, color: 'text.secondary' }} />
+          Payment Method
+      </Typography>
+      <Stack direction="row" spacing={3}>
+        {methods.map((method) => {
+          const selected = value === method.id;
 
-        return (
-          <Box
-            key={method.id}
-            onClick={() => onChange(method.id)}
-            sx={{
-              cursor: "pointer",
-              p: 2,
-              borderRadius: 2,
-              border: "2px solid",
-              borderColor: selected ? "secondary.main" : "#e5e7eb",
-              display: "flex",
-              gap: 1.5,
-              transition: "all 0.2s ease",
-              "&:hover": { borderColor: "secondary.main" },
-            }}
-          >
-            <Radio
-              checked={selected}
+          return (
+            <Box
+              key={method.id}
+              onClick={() => onChange(method.id)}
               sx={{
-                color: "secondary.main",
-                "&.Mui-checked": { color: "secondary.main" },
+                cursor: "pointer",
+                p: 2,
+                borderRadius: 2,
+                border: "2px solid",
+                borderColor: selected ? "secondary.main" : "#e5e7eb",
+                display: "flex",
+                gap: 1.5,
+                transition: "all 0.2s ease",
+                "&:hover": { borderColor: "secondary.main" },
               }}
-            />
+            >
+              <Radio
+                checked={selected}
+                sx={{
+                  color: "secondary.main",
+                  "&.Mui-checked": { color: "secondary.main" },
+                }}
+              />
 
-            <Box>
-              <Typography fontWeight={600} color="text.secondary">{method.title}</Typography>
-              <Typography variant="body2" color="text.disabled">
-                {method.subtitle}
-              </Typography>
+              <Box>
+                <Typography fontWeight={600} color="text.secondary">{method.title}</Typography>
+                <Typography variant="body2" color="text.disabled">
+                  {method.subtitle}
+                </Typography>
+              </Box>
             </Box>
-          </Box>
-        )
-      })}
-    </Stack>
+          )
+        })}
+      </Stack>
+    </Box>
     </>
   );
 }

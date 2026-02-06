@@ -1,7 +1,7 @@
 import React from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { Box, Card, CardContent, Typography, Stack, TextField, Autocomplete, InputAdornment, MenuItem, Select, FormControl, InputLabel } from "@mui/material";
+import { Box, Card, CardContent, Typography, Stack, TextField, Autocomplete, InputAdornment, MenuItem, Select, FormControl, InputLabel, Divider} from "@mui/material";
 import PaymentMethodSelector from "../../../components/reusable/PaymentMethodSelector";
 import PersonIcon from "@mui/icons-material/Person";
 
@@ -110,6 +110,61 @@ function Payment() {
         
       </Stack>
     )}
+  const advance = () => {
+    return (
+      <Stack spacing={3}>
+        <Stack direction="row" spacing={2}>
+          <Autocomplete
+            options={employees}
+            getOptionLabel={(option) => `${option.name} (${option.id})`}
+            value={employee}
+            onChange={(event, newValue) => setEmployee(newValue)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Employee Name/ID"
+                InputProps={{
+                  ...params.InputProps,
+                  startAdornment: (
+                    <InputAdornment position="start">
+                    <PersonIcon color="action" />
+                    </InputAdornment>
+                ),
+                }}
+              />
+            )}
+            fullWidth
+            // need to add refs and keydown handlers here as well
+          />  
+              
+
+            {/* Net Amount */}
+            <TextField
+              label="Net Amount ($)"
+              value={netAmount}
+              onChange={(e) => setNetAmount(e.target.value)}
+              InputProps={{
+                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+              }}
+              
+              // inputRef={netAmountRef}
+              // onKeyDown={(e) => handleKeyDown(e, notesRef)}
+            />
+          </Stack>
+          <PaymentMethodSelector value={paymentMethod} onChange={setPaymentMethod} />
+          <TextField
+            label="Payment Notes (Optional)"
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            placeholder="Add any specific details regarding this payroll cycle..."
+            multiline
+            rows={4}
+            fullWidth
+            // inputRef={notesRef}
+          />
+        
+      </Stack>
+    )}
   
   return (
     <>
@@ -135,11 +190,12 @@ function Payment() {
     <Stack direction="row" spacing={3} >
     <Card sx={{ flex: 2 }}>
       {/* Payment content goes here */}
-      <CardContent>
-        <Typography variant="subtitle1" sx={{ mb: 4, color: 'text.primary' }}>
+      <CardContent >
+        <Typography variant="subtitle1"  sx={{ mb: 4, color: 'text.primary' }}>
           {type.charAt(0).toUpperCase() + type.slice(1)} Payment Details
         </Typography>
         {type === "salary" && salary()}
+        {type === "advance" && advance()}
         
       </CardContent>
     </Card>
