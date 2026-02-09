@@ -4,6 +4,7 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { Box, Card, CardContent, Typography, Stack, TextField, Autocomplete, InputAdornment, MenuItem, Select, FormControl, InputLabel, Divider} from "@mui/material";
 import PaymentMethodSelector from "../../../components/reusable/PaymentMethodSelector";
 import PersonIcon from "@mui/icons-material/Person";
+import type { PaymentOption } from "../../../types/PaymentOption";
 
 type Employee = {
   name: string;
@@ -12,7 +13,7 @@ type Employee = {
 
 function Payment() {
   const [type, setType] = React.useState("salary");
-  const [paymentMethod, setPaymentMethod] = React.useState("cash");
+  const [paymentMethod, setPaymentMethod] = React.useState<PaymentOption>();
   const [employee, setEmployee] = React.useState<Employee | null>(null); // store as object
   const [netAmount, setNetAmount] = React.useState("4170.40");
   const [notes, setNotes] = React.useState("");
@@ -29,6 +30,11 @@ function Payment() {
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
+
+  const payeeOptions = [
+    employee?.name || "",  // fallback to empty string if undefined
+    "cash"
+  ].filter(Boolean);      // removes empty string if employee?.name is undefin
   
   const handleType = (
     event: React.MouseEvent<HTMLElement>,
@@ -38,6 +44,9 @@ function Payment() {
       setType(newType);
     }
   };
+
+ 
+
 
   const salary = () => {
     return (
@@ -87,16 +96,16 @@ function Payment() {
             <TextField
               label="Net Amount ($)"
               value={netAmount}
-              onChange={(e) => setNetAmount(e.target.value)}
+              // onChange={handleNetAmountChange}
               InputProps={{
-                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                startAdornment: <InputAdornment position="start">$</InputAdornment>,  
               }}
               fullWidth
               // inputRef={netAmountRef}
               // onKeyDown={(e) => handleKeyDown(e, notesRef)}
             />
           </Stack>
-          <PaymentMethodSelector value={paymentMethod} onChange={setPaymentMethod} />
+          <PaymentMethodSelector payees={payeeOptions} value={paymentMethod} onChange={setPaymentMethod} />
           <TextField
             label="Payment Notes (Optional)"
             value={notes}
@@ -144,14 +153,14 @@ function Payment() {
               value={netAmount}
               onChange={(e) => setNetAmount(e.target.value)}
               InputProps={{
-                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                startAdornment: <InputAdornment position="start">$</InputAdornment>,  // need to add validation here
               }}
               
               // inputRef={netAmountRef}
               // onKeyDown={(e) => handleKeyDown(e, notesRef)}
             />
           </Stack>
-          <PaymentMethodSelector value={paymentMethod} onChange={setPaymentMethod} />
+          <PaymentMethodSelector payees={payeeOptions} value={paymentMethod} onChange={setPaymentMethod} />
           <TextField
             label="Payment Notes (Optional)"
             value={notes}
