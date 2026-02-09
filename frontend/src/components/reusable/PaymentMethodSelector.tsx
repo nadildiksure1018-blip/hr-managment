@@ -14,6 +14,7 @@ import type { PaymentOption } from "../../types/PaymentOption";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import FileUpload from "./FileUpload";
 
 const methods = [
   { id: "cash", title: "Cash", subtitle: "Direct handover" },
@@ -94,6 +95,22 @@ export default function PaymentMethodSelector({
     });
   };
 
+  const updateProofFile = (files: File[]) => {   //bank mehtod prroffile update
+    if (safeValue.method !== "bank") return;
+    onChange({
+      ...safeValue,
+      bank: { ...safeValue.bank, proofFile: files },
+    });
+  };
+
+  const updateBankAcc = (accNo: string) => {  //bank method account number update
+    if (safeValue.method !== "bank") return;
+    onChange({
+      ...safeValue,
+      bank: { ...safeValue.bank, bankAccountNo: accNo },
+    });
+  };
+
   const safeValue = value ?? DEFAULT_PAYMENT;
 
   return (
@@ -161,11 +178,11 @@ export default function PaymentMethodSelector({
                     }
                     onChange={(_, newValue) => {
                       updateCheque("bankAccountNo", newValue?.No ?? "");
-                      console.log(newValue?.No ?? "");
                     }}
                     renderInput={(params) => (
                       <TextField {...params} 
                         label="Account No" 
+                        placeholder="select the account "
                         InputLabelProps={{ shrink: true }} 
                       />
                     )}
@@ -239,13 +256,40 @@ export default function PaymentMethodSelector({
                 //   }
                 // }}
                 renderInput={(params: AutocompleteRenderInputParams) => (
-                  <TextField {...params} label="Payee" />
+                  <TextField {...params} label="Payee" placeholder="select the payee " InputLabelProps={{ shrink: true }}  />
                 )}
                 fullWidth
                 // need to add refs and keydown handlers here as well
               />
             </Stack>
           </>
+        )}
+        {safeValue.method === "bank" && (
+          <Stack direction="column" spacing={3} sx={{ mt: 3, p:4, backgroundColor:"#FBFBFB", borderRadius:"12px" }}>
+            <Autocomplete
+              options={account}
+              getOptionLabel={(option) => `${option.No} (${option.Bank})`}
+              value={
+                account.find(
+                  (acc) => acc.No === safeValue.bank.bankAccountNo,
+                ) ?? null
+              }
+              onChange={(_, newValue) => {
+                updateBankAcc(newValue?.No ?? "");
+              }}
+              renderInput={(params) => (
+                <TextField {...params} 
+                  label="Account No" 
+                  placeholder="select the account "
+                  InputLabelProps={{ shrink: true }} 
+                />
+              )}
+            />
+            <FileUpload
+              files={safeValue.bank.proofFile ?? []}
+              setFiles={updateProofFile}
+            />
+          </Stack>
         )}
       </Box>
     </>

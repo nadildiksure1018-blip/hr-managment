@@ -1,5 +1,5 @@
-// MUIFileUpload.tsx
-import React, { useCallback, useState } from "react";
+// FileUpload.tsx
+import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import {
   Box,
@@ -12,12 +12,18 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const MUIFileUpload: React.FC = () => {
-  const [files, setFiles] = useState<File[]>([]);
+interface FileUploadProps {
+  files: File[]; // files from parent
+  setFiles: (files: File[]) => void; // function to update parent state
+}
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    setFiles(prev => [...prev, ...acceptedFiles]);
-  }, []);
+const FileUpload: React.FC<FileUploadProps> = ({ files, setFiles }) => {
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      setFiles([...files, ...acceptedFiles]);
+    },
+    [files, setFiles]
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -26,8 +32,8 @@ const MUIFileUpload: React.FC = () => {
   });
 
   return (
-    <Card variant="outlined">
-      <CardContent>
+    <>
+   
         <Box
           {...getRootProps()}
           sx={{
@@ -78,9 +84,8 @@ const MUIFileUpload: React.FC = () => {
             ))}
           </Stack>
         )}
-      </CardContent>
-    </Card>
+    </>
   );
 };
 
-export default MUIFileUpload;
+export default FileUpload;

@@ -19,7 +19,7 @@ export type PaymentOption =
   | {
         method: "bank";
         bank: {
-            proofFile: File | null;
+            proofFile: File[] | null;
             bankAccountNo: string;
             //need to add bank account details here as well
         };

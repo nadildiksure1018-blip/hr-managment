@@ -105,7 +105,7 @@ function Payment() {
               // onKeyDown={(e) => handleKeyDown(e, notesRef)}
             />
           </Stack>
-          <PaymentMethodSelector payees={payeeOptions} value={paymentMethod} onChange={setPaymentMethod} />
+          <PaymentMethodSelector payees={payeeOptions} value={paymentMethod} onChange={setPaymentMethod}/>
           <TextField
             label="Payment Notes (Optional)"
             value={notes}
