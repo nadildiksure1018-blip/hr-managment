@@ -41,6 +41,12 @@ function Payment() {
     newType: string,
   ) => {
     if (newType !== null) {
+      setPaymentMethod({
+        method: "cash",
+        cash: {
+          cashDrawer: true, // or false
+        },
+      });
       setType(newType);
     }
   };
