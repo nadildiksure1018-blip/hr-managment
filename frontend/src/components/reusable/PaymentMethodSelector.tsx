@@ -291,6 +291,12 @@ export default function PaymentMethodSelector({
             />
           </Stack>
         )}
+
+        {safeValue.method === "cash" && (
+          <Stack direction="row" spacing={3} sx={{ mt: 3, p:4, backgroundColor:"#FBFBFB", borderRadius:"12px" }}>
+            
+          </Stack>
+        )}
       </Box>
     </>
   );
