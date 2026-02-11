@@ -202,7 +202,7 @@ function Payment() {
         </ToggleButton>
       </ToggleButtonGroup>
     </Box>
-    <Stack direction="row" spacing={3} >
+    <Stack direction="row" spacing={3} alignItems="flex-start">
     <Card sx={{ flex: 2 }}>
       {/* Payment content goes here */}
       <CardContent >
@@ -214,12 +214,18 @@ function Payment() {
         
       </CardContent>
     </Card>
-    <Card>
+    <Card sx={{ backgroundColor: '#DAE4FF' }}>
       {/* Payment summary goes here */}
       <CardContent>
         <Typography variant="subtitle1" sx={{ mb: 1 , color: 'text.primary' }}>
           Payment Summary
         </Typography>
+        {type === "salary" &&(
+          <Stack direction="row" justifyContent="space between">
+            <Typography >Nett salary     </Typography>
+            <Typography>88,000</Typography>
+          </Stack>
+        )}
       </CardContent>
     </Card>
     </Stack>

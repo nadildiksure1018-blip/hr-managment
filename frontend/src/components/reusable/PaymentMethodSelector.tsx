@@ -7,6 +7,7 @@ import {
   TextField,
   InputAdornment,
   Autocomplete,
+  Icon,
 } from "@mui/material";
 import type { AutocompleteRenderInputParams } from "@mui/material/Autocomplete";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
@@ -15,6 +16,8 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import FileUpload from "./FileUpload";
+import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
+import Switch from '@mui/material/Switch';
 
 const methods = [
   { id: "cash", title: "Cash", subtitle: "Direct handover" },
@@ -110,6 +113,15 @@ export default function PaymentMethodSelector({
       bank: { ...safeValue.bank, bankAccountNo: accNo },
     });
   };
+
+  const updateCashDrawer = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) =>{
+
+    if (safeValue.method !== "cash") return;
+    onChange({
+      ...safeValue,
+      cash: { ...safeValue.cash, cashDrawer: checked },
+    });
+  }
 
   const safeValue = value ?? DEFAULT_PAYMENT;
 
@@ -293,8 +305,37 @@ export default function PaymentMethodSelector({
         )}
 
         {safeValue.method === "cash" && (
-          <Stack direction="row" spacing={3} sx={{ mt: 3, p:4, backgroundColor:"#FBFBFB", borderRadius:"12px" }}>
-            
+          <Stack direction="row" spacing={3} justifyContent="space-between" sx={{ mt: 3, p:2,px:4, backgroundColor:"#FBFBFB", borderRadius:"12px" }}>
+            <Stack direction="row" spacing={1}>
+              <Box
+                sx={{
+                  width: 50,
+                  height: 50,
+                  borderRadius: "50%",
+                  bgcolor: "#EEEEEE",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}
+              >
+                <PointOfSaleIcon 
+                  sx={{ color: "#2D3949" }}
+                />
+              </Box>
+              <Stack direction="column" justifyContent="center">
+                <Typography color="text.secondary">Cash Drawer Reconciliation</Typography>
+                <Typography variant="body2" color="text.disabled">Auto-update internal cash registry logs</Typography>
+              </Stack>
+            </Stack>
+            <Stack direction="row" alignItems="center">
+              <Typography color="text.secondary">Pay from cash drawer?</Typography>
+              <Switch
+                checked={safeValue.cash.cashDrawer} 
+                onChange={updateCashDrawer}
+                slotProps={{ input: { 'aria-label': 'controlled' } }} 
+                defaultChecked 
+              />
+            </Stack>
           </Stack>
         )}
       </Box>
