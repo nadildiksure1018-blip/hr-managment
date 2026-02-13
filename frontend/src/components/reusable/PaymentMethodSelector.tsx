@@ -235,11 +235,11 @@ export default function PaymentMethodSelector({
                               borderRadius: '8px !important',
                             },
                             '&:hover fieldset': {
-                              borderColor: '#9CA3AF',
+                              borderColor: '#9CA3AF !important',
                             },
                             // focused state
                             '&.Mui-focused fieldset': {
-                              borderColor: '#9CA3AF',
+                              borderColor: '#9CA3AF !important',
                             },
                               
                           },
