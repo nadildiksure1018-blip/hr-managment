@@ -5,9 +5,7 @@ import {
   Typography,
   Stack,
   TextField,
-  InputAdornment,
   Autocomplete,
-  Icon,
 } from "@mui/material";
 import type { AutocompleteRenderInputParams } from "@mui/material/Autocomplete";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";

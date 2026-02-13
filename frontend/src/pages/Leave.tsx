@@ -2,12 +2,11 @@ import { Tabs, Tab, Typography } from "@mui/material";
 import { Outlet, useLocation, Link } from "react-router-dom";
 
 
-function Payroll() {
+function Leave() {
 
   const tabs = [
-    { label: "Overview", path: "/payroll/overview" },
-    { label: "Add Payment", path: "/payroll/payment" },
-    { label: "Payslips", path: "/payroll/payslips" },
+    { label: "Add Request", path: "/leave/request" },
+    { label: "Review Request", path: "/leave/review" }
     // Add more tabs here as needed
   ];
   const location = useLocation();
@@ -15,7 +14,7 @@ function Payroll() {
   return (
     <>
       <div>
-        <Typography variant="subtitle1" sx={{ ml: 2, pt: 0 }}>Payroll</Typography>
+        <Typography variant="subtitle1" sx={{ ml: 2, pt: 0 }}>Leave</Typography>
         <Tabs value={location.pathname} >        //textColor="secondary" indicatorColor="secondary"
           {tabs.map((tab) => (
             <Tab
@@ -36,4 +35,4 @@ function Payroll() {
   );
 }
 
-export default Payroll;
+export default Leave;

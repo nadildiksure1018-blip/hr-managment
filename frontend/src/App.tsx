@@ -6,6 +6,9 @@ import Payroll from './pages/Payroll'
 import Overview from './pages/subpages/payroll/Overview'
 import Payslips from './pages/subpages/payroll/Payslips'
 import Payment from './pages/subpages/payroll/Payment'
+import Leave from './pages/Leave'
+import Request from './pages/subpages/leave/Request'
+import Review from './pages/subpages/leave/Review'
 
 function App() {
   return (
@@ -18,6 +21,10 @@ function App() {
             <Route path="overview" element={<Overview />} />
             <Route path="payment" element={<Payment />} />
             <Route path="payslips" element={<Payslips />} />
+          </Route>
+          <Route path="leave/" element={<Leave />}>
+            <Route path="request" element={<Request />} />
+            <Route path="review" element={<Review />} />
           </Route>
         </Route>
       </Routes>

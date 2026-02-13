@@ -18,6 +18,7 @@ function Nav() {
   const menuItems = [
     { text: 'Dashboard', icon: <DashboardIcon />, path:'/dashboard' },
     { text: 'Payroll', icon: <DashboardIcon />, path:'/payroll/overview'},
+    { text: 'Leave', icon: <DashboardIcon />, path:'/leave/request'},
   ];
   
   const toggleDrawer = () => {
